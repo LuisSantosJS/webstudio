@@ -1,24 +1,24 @@
 {
-  "packageManager": "pnpm@9.0.2",
+  "packageManager": "yarn@9.0.2",
   "name": "webstudio-root",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "pnpm -r --filter='!./fixtures/*' build",
-    "dts": "pnpm -r dts",
-    "dev": "pnpm --filter='@webstudio-is/builder' --filter='@webstudio-is/prisma-client' --parallel --recursive dev",
+    "build": "yarn -r --filter='!./fixtures/*' build",
+    "dts": "yarn -r dts",
+    "dev": "yarn --filter='@webstudio-is/builder' --filter='@webstudio-is/prisma-client' --parallel --recursive dev",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
-    "checks": "pnpm -r test && pnpm -r typecheck && pnpm lint",
+    "checks": "yarn -r test && yarn -r typecheck && yarn lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "storybook:dev": "storybook dev -p 6006",
     "storybook:build": "storybook build",
-    "migrations": "cd apps/builder && pnpm migrations --dev",
-    "build-figma-tokens": "cd packages/design-system && pnpm build-figma-tokens",
+    "migrations": "cd apps/builder && yarn migrations --dev",
+    "build-figma-tokens": "cd packages/design-system && yarn build-figma-tokens",
     "prepare": "which git && git config core.hooksPath .git/hooks/ && simple-git-hooks || echo git not installed",
-    "local:version-snapshot": "pnpm -r exec pnpm version prepatch --preid $(cat /dev/urandom | LC_ALL=C tr -dc 'a-z' | fold -w 8 | head -n 1)",
-    "local:publish-snapshot": "pnpm -r publish --access public --no-git-checks --registry http://localhost:4873",
+    "local:version-snapshot": "yarn -r exec yarn version prepatch --preid $(cat /dev/urandom | LC_ALL=C tr -dc 'a-z' | fold -w 8 | head -n 1)",
+    "local:publish-snapshot": "yarn -r publish --access public --no-git-checks --registry http://localhost:4873",
     "local:dangerously-undo-version-snapshot": "git restore --source=$(git branch --show-current) '**/*/package.json'",
-    "local:release": "pnpm build && pnpm dts && pnpm local:version-snapshot && pnpm local:publish-snapshot && pnpm local:dangerously-undo-version-snapshot && echo \"now execute\npnpm up -r -L '@webstudio-is/*' --registry http://localhost:4873\""
+    "local:release": "yarn build && yarn dts && yarn local:version-snapshot && yarn local:publish-snapshot && yarn local:dangerously-undo-version-snapshot && echo \"now execute\nyarn up -r -L '@webstudio-is/*' --registry http://localhost:4873\""
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
@@ -51,8 +51,8 @@
   },
   "engines": {
     "node": "20",
-    "pnpm": "9.0",
-    "yarn": "This project is configured to use pnpm"
+    "yarn": "9.0",
+    "yarn": "This project is configured to use yarn"
   },
   "nano-staged": {
     "*.{ts,tsx,js,json,css,md}": "prettier --write"
@@ -71,7 +71,7 @@
       }
     ]
   },
-  "pnpm": {
+  "yarn": {
     "overrides": {
       "@types/react": "^18.2.70",
       "@types/react-dom": "^18.2.25",
